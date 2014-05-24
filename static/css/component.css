@@ -136,14 +136,27 @@
 /* Button 1 */
 .btn-1 {
 	border: 3px solid #7389FF;
+	color: #fff;
+	background: #7389FF;
+	}
+.btn-1Bl {
+	border: 3px solid #7389FF;
 	color:  #7389FF;
 }
-
 /* Button 1a */
 .btn-1a:hover,
 .btn-1a:active {
-	color: #fff;
-	background:  #7389FF;
+	border: 3px solid #fff;
+	color:  #7389FF;
+	background-color: #fff;
+;
+}
+.btn-1Bl:hover,
+.btn-1Bl:active{
+	border: 3px solid #7389FF;
+	color:  #fff;
+	background-color: #7389FF;
+
 }
 /* Button 1b */
 .btn-1b:after {

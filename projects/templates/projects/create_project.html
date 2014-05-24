@@ -5,7 +5,13 @@
 <h1>Create a project!</h1>
 
 <form method="post">
+    {% csrf_token %}
+    
     Project Name: <input type="text" name="project-name"><br />
-    Email addresses: <textarea name="emails"></textarea>
+    Email addresses: <br />
+    <input type="email" name="email[]"></textarea> <br />
+    <input type="email" name="email[]"></textarea> <br />
+    <input type="email" name="email[]"></textarea> <br />
+    <input type="submit"></input>
 </form>
 </body>

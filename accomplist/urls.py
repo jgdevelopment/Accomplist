@@ -5,6 +5,8 @@ admin.autodiscover()
 
 import projects
 from projects import urls
+import main
+from main import urls
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,4 +15,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^projects/', include(projects.urls)),
+    url(r'^', include(main.urls)),
+
 )

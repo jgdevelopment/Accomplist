@@ -1,0 +1,9 @@
+div#submitForm input {
+  background: url("../../images/findButton.png");
+  color: #000000;
+  cursor: pointer;
+  font-weight: bold;
+  height: 70px;
+  padding-bottom: 2px;
+  width: 200;
+}

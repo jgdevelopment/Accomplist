@@ -1,5 +1,5 @@
 """
-Django settings for accomplist project.
+Django settings for odin project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -36,9 +36,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     
     'main',
     'projects',
+=======
+    'main',
+>>>>>>> 51cb6d4b68ab5bd5c613e8075c4e3b537262e4b1
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,3 +87,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates').replace('\\','/'),
+)

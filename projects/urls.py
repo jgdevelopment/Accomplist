@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^create/', views.create_project, name='create_project'),
+    url(r'view/(?P<slug>[\w-]+)', views.view_project, name='view_project')
 )

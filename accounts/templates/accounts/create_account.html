@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+<div class="container">
+<div class="row">
+
+<h2>Sign Up Form</h2>
+<legend><h3>Don't Have an account? Sign Up</h3></legend>
+
+<form method = "post">
+
+<input id="username" type="text" name="username" maxlength="20" placeholder="Username">
+<input id="password" type="text" name="password" placeholder="Password">
+<button id="create_account" name="create_account" type="button">Sign Up</button>
+
+</form>
+
+{% endblock %}
+

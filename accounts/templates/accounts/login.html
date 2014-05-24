@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<div class="container">
+<div class="row">
+  <div class="page-header"><h2>Login Form</h2></div>
+  
+  <form class="form-horizontal" method="post">
+  {% csrf_token %}
+      <!-- Form Name -->
+    {% if invalid_login %}
+	  <p>That username or password was incorrect.</p>
+	  {% endif %}
+      <legend><h3>Have an account? Sign In</h3></legend>
+
+      <!-- Text input-->
+
+      <div class="form-group">        
+        <label class="col-md-1 control-label" for="username"></label>  
+        <div class="col-md-12">
+          <input id="username" type="text" name="username" maxlength="20" placeholder="Username" class="form-control input-md" required autofocus>
+        </div>
+      </div>
+
+      <!-- Password input-->
+      <div class="form-group">
+        <label class="col-md-1 control-label" for="password"></label>
+        <div class="col-md-12">
+          <input id="password" type="password" name="password" placeholder="Password" class="form-control input-md" required autofocus>
+        </div>
+      </div>
+
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-1 control-label" for="login"></label>
+      <div class="col-md-10">
+        <button id="Login" name="Login" class="btn btn-block btn-success">Login</button>
+      </div>
+      </div>
+  </form>
+</div> <!--./row -->
+</div> <!--./container -->

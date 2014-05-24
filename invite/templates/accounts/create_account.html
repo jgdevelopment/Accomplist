@@ -1,0 +1,48 @@
+{% extends "odin/base.html" %}
+{% load staticfiles %}
+<!DOCTYPE html>
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+<div class="container">
+<div class="row">
+
+<div class="page-header"><h2>Sign Up Form</h2></div>
+<legend><h3>Don't Have an account? Sign Up</h3></legend>
+
+<!-- Text input-->
+<form method = "post">
+{% csrf_token %}
+<div class="form-group">        
+<label class="col-md-1 control-label" for="username"></label>  
+<div class="col-md-12">
+<input id="username" type="text" name="username" maxlength="20" placeholder="Username" class="form-control input-md" required autofocus>
+</div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+<label class="col-md-1 control-label" for="password"></label>
+<div class="col-md-12">
+<input id="password" type="text" name="password" placeholder="Password" class="form-control input-md" required autofocus>
+</div>
+</div>
+
+</hr>
+<!-- Button (Double) -->
+<div class="form-group">
+<label class="col-md-1 control-label" for="create_account"></label>
+<div class="col-md-10">
+<hr>
+</hr>
+<button id="create_account" name="create_account" type="button" class="btn btn-block btn-success">Sign Up</button>
+</div>
+
+</form>
+
+</div>
+</div> <!--./row -->
+</div> <!--./container -->
+{% endblock %}
+

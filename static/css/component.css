@@ -55,7 +55,9 @@
 	position: relative;
 	-webkit-font-smoothing: antialiased;
 }
-
+.container23 {
+    background:transparent url("{% static 'images/check.png' %}") no-repeat center center;
+}
 .icon-envelope:before {
 	content: "\e000";
 }
@@ -81,7 +83,6 @@
 .icon-star:before {
 	content: "\e00b";
 }
-
 /* Filled star */
 .icon-star:after,
 .icon-star-2:before {

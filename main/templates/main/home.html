@@ -22,14 +22,18 @@
 
 <body style="background:rgb(80, 218, 163);">
 <h1 align="center" style="font-family:lato;font-size:104px;top:200px;color:#fff;">Accomplist</h1>
-<br />
-<h1 align="center" style="font-family:lato;font-size:36px;color:#fff;">Compete to complete</h1>
 <div style="text-align:center;">
+
+<img src="{% static 'images/underline.png' %}"style="position: relative;width: 500px;height:30px;">
+</div>
+<br />
+<div style="text-align:center;">
+<img src="{% static 'images/check.png' %}"style="position: relative;width: 500px;left:40px;top:-50px;">
 <form action='/projects/create/{{ slug }}'>
-<button class="btn btn-1 btn-1a" style="top:200px;font-size:20px;">Create Project</button>
+<button class="btn btn-1 btn-1a" style="top:-100px;font-size:20px;">Create Project</button>
 </form>
 </div>
-<img align="right" src="{% static 'images/check.png' %}"style="position: relative;width: 500px">
+
 
 <script src="{% static 'js/classie.js' %}"></script>
 		<script>

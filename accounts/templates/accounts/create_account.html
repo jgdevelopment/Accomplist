@@ -10,13 +10,12 @@
 <h2>Sign Up Form</h2>
 <legend><h3>Don't Have an account? Sign Up</h3></legend>
 
-<form method = "post">
-
+<form method="post">
+{% csrf_token %}
 <input id="username" type="text" name="username" maxlength="20" placeholder="Username">
 <input id="email" type="email" name="email" maxlength="40" placeholder="Email">
 <input id="password" type="text" name="password" placeholder="Password">
-<button id="create_account" name="create_account" type="button">Sign Up</button>
-
+<button id="create_account" name="create_account" type="submit">Sign Up</button>
 </form>
 
 {% endblock %}

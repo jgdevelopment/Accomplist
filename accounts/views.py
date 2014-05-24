@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from accounts.models import UserProfile
 
 def index(request):
     return create_account(request)
@@ -15,6 +16,7 @@ def create_account(request):
         return render(request, 'accounts/create_account.html', params)
         
     if request.method == 'POST':
+        print('creating account')
         username = request.POST.get('username')
         password = request.POST.get('password')
         email = request.POST.get('email')
@@ -23,6 +25,8 @@ def create_account(request):
             return render_page(user_exists=True)
         else:
             user = User.objects.create_user(username, email, password)
+            profile = UserProfile.create(user)
+            profile.save()
             return redirect('main.views.home')
     else:
         return render_page()

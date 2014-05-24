@@ -1,5 +1,5 @@
 """
-Django settings for odin project.
+Django settings for accomplist project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -51,7 +51,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'accomplist.urls'
 
 WSGI_APPLICATION = 'accomplist.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

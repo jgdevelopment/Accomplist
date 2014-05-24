@@ -5,7 +5,6 @@ from projects.models import Project
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    projects = models.ManyToManyField(Project)
     
     @classmethod
     def create(cls, user):

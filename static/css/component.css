@@ -227,6 +227,11 @@
 	border: 3px solid #7389FF;
 	color:  #fff;
 }
+.btn-1r {
+	border: 3px solid #F84A82;
+	color:  #fff;
+	background-color: #F84A82;
+}
 /* Button 1a */
 .btn-1a:hover,
 .btn-1a:active {
@@ -235,7 +240,13 @@
 	background-color: #fff;
 ;
 }
+.btn-1r:hover,
+.btn-1r:active{
+	border: 3px solid #fff;
+	color:  #474747;
+	background-color: #fff;
 
+}
 .btn-1Bl:hover,
 .btn-1Bl:active{
 	border: 3px solid #7389FF;
@@ -243,6 +254,8 @@
 	background-color: #fff;
 
 }
+}
+
 /* Button 1b */
 .btn-1b:after {
 	width: 100%;

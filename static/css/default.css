@@ -21,8 +21,8 @@ body, html { font-size: 100%; padding: 0; margin: 0; height: 100%;}
 
 body {
 	font-family: 'Lato', Calibri, Arial, sans-serif;
-	color: #474747;
-	background: #fff;
+	color: #FAFAFA;
+	background: #81A1F5;
 }
 
 a {
@@ -38,8 +38,7 @@ span{
 display:inline-block;
 vertical-align: middle;
 line-height: normal;
-width: 100px;
-height: 100px;
+height: 50px;
 }
 /* Header Style */
 .main,

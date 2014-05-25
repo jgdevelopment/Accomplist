@@ -92,8 +92,8 @@ function updateTasks() {
 <center>
 <p style="font-weight:regular;color:#fff;font-size:30px;text-align:center;">Leaderboards:
 <h2>
-<b style="font-weight:regular;color:rgb({{currentUserScore.0.color.r}},{{currentUserScore.0.color.g}},{{currentUserScore.0.color.b}});font-size:40px;display:inline;text-align:center;">
-{{ currentUserScore.0.user.username}}&nbsp;&nbsp;&nbsp;&nbsp; {{ currentUserScore.1}}&nbsp;&nbsp;&nbsp;&nbsp;</b>
+<b style="font-weight:regular;color:rgb({{currentUserScore.0.color.r}},{{currentUserScore.0.color.g}},{{currentUserScore.0.color.b}});font-size:40px;display:inline;text-align:center;"><u>
+{{ currentUserScore.0.user.username}}</u>&nbsp;&nbsp;&nbsp;&nbsp; {{ currentUserScore.1}}&nbsp;&nbsp;&nbsp;&nbsp;</b>
 {% for score in sortedScores %}
 <b style="color:rgb({{score.0.color.r}},{{score.0.color.g}},{{score.0.color.b}});">
 {{ score.0.user.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{ score.1 }}

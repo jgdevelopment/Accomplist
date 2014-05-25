@@ -19,6 +19,7 @@ def create_project(request):
         project = Project.create(project_name)
         project.save()
         
+        print(request.user)
         current_user_profile = UserProfile.objects.get(user=request.user)
         project.users.add(current_user_profile)
         

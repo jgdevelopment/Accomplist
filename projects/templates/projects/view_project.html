@@ -8,13 +8,50 @@
 <head>
 <title>View Project</title>
 <link rel="shortcut icon" href="../favicon.ico"> 
+<script src="{% static 'js/jquery-1.10.2.min.js' %}" ></script>
+<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/default2.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/component2.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/component2.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.nouislider.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/slider.css' %}" />
+<script src="{% static 'js/modernizr.custom.js' %}" ></script>
+<script src="{% static 'js/bootstrap-slider.js' %}" ></script>
+<script type="text/javascript">
+function addTask() {
+	$url = "/projects/addtask/?description=" + $('[name="description"]').val() + "&difficulty=" 
+		                                  +$('[name="difficulty"]').val() + "&importance=" + $('[name="importance"]').val();
+	alert($url);	                            
+	$.get($url);
+}
+</script>
 </head>
 <body>
+     
+<div class="md-modal md-effect-11" id="modal-11">
+	<div class="md-content">
+		<h3>Add Task</h3>
+		<div>
+			<p style="text-align:center;">Add a task in the space below</p>
+				<p style="font-size:20px;color:#ffff;text-align:center;"> Task Name &nbsp;
+   				 <input type="text" name="description" style="color:#000;">
+
+   				 <br />
+				<p style="font-size:18px;color:#ffff;text-align:center;"> Difficulty &nbsp;
+   				 <input id="ex1" name="difficulty" data-slider-id='ex1Slider' type="text" data-slider-min="1" value="4" data-slider-max="4" data-slider-step="1" data-slider-value="14"/>
+				<br />
+				<p style="font-size:18px;color:#ffff;text-align:center;"> Importance &nbsp;
+   				 <input id="ex2" data-slider-id='ex1Slider' name="importance" type="text" data-slider-min="1" value="4" data-slider-max="4" data-slider-step="1" data-slider-value="14"/>
+   				<br />
+   				<br />
+
+			<button onclick="addTask()" class="btn btn-1w btn-1w md-close" type="submit">Submit</button>
+		</div>
+	</div>
+</div>
 <a href="../create"><img src="{% static 'images/darkback.png' %}"style="position: relative;width: 50px;left:100px;top:50px;"></a>
 <div style="text-align:center;">
 <h1 style="text-transform:uppercase;font-size:94px;">{{ project.name }}</h1>
@@ -26,23 +63,50 @@
 </b>
 {% for score in sortedScores %}
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<b style="font-weight:regular;background-color:#fff;padding:10px;">
+<b style="font-weight:regular;color:#474747;font-size:35px;background-color:#B1C3F5;padding:20px;">
 <span>
-<b style="font-size:20px;">
+<b>
 {{ score.0.user.username}}</span></b>  &nbsp; {{ score.1 }}
 </b>
 {% endfor %}
 </h2>
 <br />
 <br />
-<button class="btn btn-1r btn-1r">Add Task</button>
+<button class="btn btn-1r btn-1r md-trigger"  data-modal="modal-11">Add Task</button>
 </div>
 <div style="padding:100px;font-size:64px;width:400px;">To Do
 </div>
 <div style="padding:100px;font-size:64px;">
 Completed
 </div>
+<div class="md-overlay"></div><!-- the overlay element -->
+
+		<!-- classie.js by @desandro: https://github.com/desandro/classie -->
+		<script src="{% static 'js/classie.js' %}"></script>
+		<script src="{% static 'js/modalEffects.js' %}"></script>
+
+		<!-- for the blur effect -->
+		<!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+		<script>
+			// this is important for IEs
+			var polyfilter_scriptpath = '/js/';
+		</script>
+		<script src="{% static 'js/cssParser.js' %}"></script>
+		<script src="{% static 'js/css-filters-polyfill.js' %}"></script>
 </body>
+<script type="text/javascript">
+
+  $('#ex1').slider({
+	formater: function(value) {
+		return value;
+	}
+});
+$('#ex2').slider({
+	formater: function(value) {
+		return value;
+	}
+});
+</script>
 </html>
 
 {% endblock %}

@@ -23,7 +23,8 @@
 <script type="text/javascript">
 function addTask() {
 	$url = "/projects/addtask/?description=" + $('[name="description"]').val() + "&difficulty=" 
-		                                  +$('[name="difficulty"]').val() + "&importance=" + $('[name="importance"]').val();
+		                                  +$('[name="difficulty"]').val() + "&importance=" + $('[name="importance"]' ).val()
+		                                  + "&project=" + "{{ project.slug }}";
 	alert($url);	                            
 	$.get($url);
 }
@@ -37,7 +38,7 @@ function addTask() {
 		<div>
 			<p style="text-align:center;">Add a task in the space below</p>
 				<p style="font-size:20px;color:#ffff;text-align:center;"> Task Name &nbsp;
-   				 <input type="text" name="description" style="color:#000;">
+   				 <input type="text" name="description" style="color:#000;height:90px;">
 
    				 <br />
 				<p style="font-size:18px;color:#ffff;text-align:center;"> Difficulty &nbsp;
@@ -74,10 +75,11 @@ function addTask() {
 <br />
 <button class="btn btn-1r btn-1r md-trigger"  data-modal="modal-11">Add Task</button>
 </div>
-<div style="padding:100px;font-size:64px;width:400px;">To Do
+<div style="padding:20px;font-size:64px;width:400px;position:relative;
+    float:left;">To Do
 </div>
-<div style="padding:100px;font-size:64px;">
-Completed
+<div style="padding:20px;font-size:64px;width:400px;position:relative;
+    float:right;">Completed
 </div>
 <div class="md-overlay"></div><!-- the overlay element -->
 

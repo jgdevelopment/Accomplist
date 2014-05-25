@@ -73,6 +73,7 @@ def add_task(request):
     current_user_profile = UserProfile.objects.filter(user=current_user).first()
 
     if not current_user_profile in UserProfile.objects.filter(project=project):
+        print(current_user_profile)
         return HttpResponseForbidden()
     
     difficulty = request.GET.get('difficulty')

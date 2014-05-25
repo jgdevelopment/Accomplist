@@ -1,11 +1,11 @@
 from django.shortcuts import render
 
-from projects.models import Project
+from projects.models import Project, Task
 from accounts.models import UserProfile, authenticate
 from django.contrib.auth.models import User
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 
 @authenticate
 def create_project(request):
@@ -60,3 +60,39 @@ def view_project(request, slug):
         return x[1]
 
     return render_page(project, [current_profile, current_score], sorted(otherScores, key=sortKey))
+    
+def test_add_task():
+    pass
+    
+@authenticate
+def add_task(request):
+    project = Project.objects.filter(slug=request.GET.get('project')).first()
+    current_user = User.objects.filter(id=request.user.id).first()
+    current_user_profile = UserProfile.objects.filter(user=current_user).first()
+
+    if not current_user_profile in UserProfile.objects.filter(project=project):
+        return HttpResponseForbidden()
+    
+    difficulty = request.GET.get('difficulty')
+    importance = request.GET.get('importance')
+    description = request.GET.get('description')
+
+    task = Task.create(project, difficulty, importance, description)
+    task.save()
+    
+@authenticate
+def view_task(request, id):
+    def render_page(task):
+        params = {'task': task}
+        return render(request, 'projects/view_task.html', params)
+    task = Task.objects.filter(id=id).first()
+    if not Task:
+        return HttpResponseNotFound('<h1>Task does not exist.</h1>')
+        
+    # must be part of project to view task
+    current_user = User.objects.filter(id=request.user.id).first()
+    current_user_profile = UserProfile.objects.filter(user=current_user).first()
+    if not current_user_profile in UserProfile.objects.filter(project=task.project):
+        return HttpResponseForbidden()   
+     
+    return render_page(task)

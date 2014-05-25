@@ -14,7 +14,7 @@ class Project(models.Model):
     def score_for(self, user):
         score = 0
         for task in Task.objects.filter(completed_by=user):
-            score += (difficulty + importance)
+            score += (task.difficulty + task.importance)
         return score
         
     def __str__(self):

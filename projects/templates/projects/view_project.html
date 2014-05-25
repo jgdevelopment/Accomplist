@@ -51,13 +51,15 @@ function updateTasks() {
 		$("#completed").empty();
 		for (var i = 0; i < complete.length; i++) {
 			var description = complete[i].fields.description;
-			//$("<p>"+ description + "</p>" + "<br />" + "<p>").appendTo("#completed");
+			$("<p>"+ description + "<p>").appendTo("#completed");
 		}
 	});
 }
 </script>
 </head>
 <body onload="updateTasks()">
+<a href="../create"><img src="{% static 'images/darkback.png' %}"style="position: relative;width: 50px;left:100px;top:50px;"></a>
+
 <div class="md-modal md-effect-11" id="modal-11">
 	<div class="md-content">
 		<h3>Add Task</h3>

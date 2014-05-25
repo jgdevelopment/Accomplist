@@ -42,7 +42,7 @@ def view_project(request, slug):
     project = Project.objects.filter(slug=slug).first()
     if not project:
         return render(request, 'projects/does_not_exist.html')
-        
+
     current_profile = None
     current_score = 0
     otherScores = []
@@ -52,6 +52,9 @@ def view_project(request, slug):
             current_score = project.score_for(profile)
         else:
             otherScores.append([profile, project.score_for(profile)])
+            
+    if not current_profile:
+        return HttpResponseRedirect(reverse('accounts.views.login'))
 
     def sortKey(x):
         return x[1]

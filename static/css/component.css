@@ -1957,9 +1957,10 @@
 }
 
 .container {
-	background: #e74c3c;
+	background: transparent;
 	min-height: 100%;
 }
+
 
 .md-modal {
 	position: fixed;

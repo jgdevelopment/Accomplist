@@ -9,18 +9,17 @@
 <title>View Project</title>
 <link rel="shortcut icon" href="../favicon.ico"> 
 <script src="{% static 'js/jquery-1.10.2.min.js' %}" ></script>
-<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/default2.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/component2.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/component2.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.nouislider.css' %}" />
+<script src="{% static '/js/chart.js' %}"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+
 <link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/slider.css' %}" />
 <script src="{% static 'js/modernizr.custom.js' %}" ></script>
+
 <script src="{% static 'js/bootstrap-slider.js' %}" ></script>
 <script type="text/javascript">
 function addTask() {
@@ -35,22 +34,23 @@ function updateTasks() {
 	var data = $.getJSON("/projects/gettasks/?project=" + "{{ project.slug }}", function(json) {
 		$.each(json, function(i, task) {
 			if (task.fields.completed_by != null){
-				complete.push(task.fields);
+				complete.push(task);
 			}
 			else{
-				incomplete.push(task.fields);
+				incomplete.push(task);
 			}
 		});
 
 		$("#toDo").empty();
 		for (var i = 0; i < incomplete.length; i++) {
-			var description = incomplete[i].description;
-			$("<p>" + description + "</p>").appendTo("#toDo");
+			var description = incomplete[i].fields.description;
+			var pk = incomplete[i].pk;
+			$("<p>" + "<a href='/task/"+  pk + "'>" + description +  "</a>" + "</p>").appendTo("#toDo");
 		}
 		$("#completed").empty();
 		for (var i = 0; i < complete.length; i++) {
-			var description = complete[i].description;
-			$("<p>" + description + "</p>").appendTo("#completed");
+			var description = complete[i].fields.description;
+			$("<p>"+"<a href='#'>" + description +"</a>"+ "</p>").appendTo("#completed");
 		}
 	});
 }
@@ -80,32 +80,45 @@ function updateTasks() {
 <a href="../create"><img src="{% static 'images/darkback.png' %}"style="position: relative;width: 50px;left:100px;top:50px;"></a>
 <div style="text-align:center;">
 <h1 style="text-transform:uppercase;font-size:94px;">{{ project.name }}</h1>
+<button class="btn btn-1r btn-1r md-trigger"  data-modal="modal-11">Add Task</button>
+<br/>
+<br/>
+<div id="green">
+<div class="container">
+<div class="row">
+<div class="col-lg-7 centered">
+<p style="font-weight:regular;color:#fff;font-size:30px;padding:20px;position:relative;
+float:left;left:-125px;text-align:left;">Leaderboards:</p>
 <h2>
 </br>
-<b style="font-weight:regular;color:#474747;font-size:35px;background-color:#B1C3F5;padding:20px;">
-<span><b>
-{{ currentUserScore.0.user.username}}</span></b> &nbsp; {{ currentUserScore.1}}
-</b>
+<b style="font-weight:regular;color:#fff;font-size:30px;padding:20px;position:relative;
+float:left;left:-360px;text-align:left;">
+{{ currentUserScore.0.user.username}}&nbsp;&nbsp;&nbsp;&nbsp; {{ currentUserScore.1}}
+<br />
+<br />
 {% for score in sortedScores %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<b style="font-weight:regular;color:#474747;font-size:35px;background-color:#B1C3F5;padding:20px;">
-<span>
-<b>
-{{ score.0.user.username}}</span></b>  &nbsp; {{ score.1 }}
-</b>
+{{ score.0.user.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{ score.1 }}
+<br />
+<br />
 {% endfor %}
+</b>
 </h2>
-<br />
-<br />
-<button class="btn btn-1r btn-1r md-trigger"  data-modal="modal-11">Add Task</button>
 </div>
-<div style="padding:20px;font-size:64px;position:relative;
-    float:left;left:100px;"><p>To Do</p>
-    <div id = "toDo" style="font-size:34px;"></div>
+</div>
+</div>
+</div>
+
+</div>
+<div  style="padding:20px;font-size:64px;position:relative;
+    float:left;left:50px;top:50px;">
+    <p>To Do</p>
+    <div id = "toDo" style="font-size:25px;position:relative;
+    float:left;left:10px;top:20px;"></div>
 </div>
 <div style="padding:20px;font-size:64px;width:400px;position:relative;
-    float:right;right:50px;"><p>Completed</p>
-	<div id = "completed" style="font-size:34px;"></div>
+    float:right;right:50px;top:50px;"><p>Completed</p>
+
+	<div id = "completed" style="font-size:25px;"></div>
 </div>
 <div class="md-overlay"></div><!-- the overlay element -->
 

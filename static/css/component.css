@@ -29,6 +29,88 @@
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
 }
+.btn {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: #fff;
+	background: none;
+	cursor: pointer;
+	padding: 25px 80px;
+	display: inline-block;
+	margin: 15px 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.btnCustG {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: rgb(80, 218, 163);
+	cursor: pointer;
+	height:15px;
+	padding:25px 20px;
+	display: inline-block;
+	margin: 0px 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color:#fff;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.btnCustR {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: #D45555;
+	cursor: pointer;
+	height:15px;
+	padding:25px 20px;
+	display: inline-block;
+	margin: 0px 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	color:#fff;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.btnCustR:disabled {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: #fff;
+	cursor: pointer;
+	height:15px;
+	padding:25px 20px;
+	display: inline-block;
+	margin: 0px 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	color:#fff;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
 
 .btn:after {
 	content: '';
@@ -140,6 +222,7 @@
 	color: #fff;
 	background: #7389FF;
 	}
+
 .btn-1Bl {
 	border: 3px solid #7389FF;
 	color:  #7389FF;
@@ -152,11 +235,12 @@
 	background-color: #fff;
 ;
 }
+
 .btn-1Bl:hover,
 .btn-1Bl:active{
 	border: 3px solid #7389FF;
-	color:  #fff;
-	background-color: #7389FF;
+	color:  #7389FF;
+	background-color: #fff;
 
 }
 /* Button 1b */

@@ -41,6 +41,9 @@ function addLink() {
 <body>
 <div class="col-sm-offset-2 col-sm-8">
 <h2 style="text-align:left;font-size:72;color:#fff;">Task: {{ task.description }}</h2>
+{% if completed %}
+<h3 style="font-size:35px;font-weight:bold;color:orange">Task completed by {{ completer }}!</h3>
+{% endif %}
 <br />
 <br />
 <br />
@@ -73,7 +76,9 @@ function addLink() {
 
 <a href="/projects/view/{{ task.project.slug }}"style="font-size:24;">Back to Project</a> <br /><br />
 </form>
+{% if not completed %}
 <button class="btn btn-1 btn-1g" style="font-size:20px;" onclick="javascript:completeTask()">Complete Task</button>
+{% endif %}
 </div>
 </div>
 </body>

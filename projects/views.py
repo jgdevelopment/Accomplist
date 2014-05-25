@@ -86,7 +86,11 @@ def add_task(request):
 @authenticate
 def view_task(request, id):
     def render_page(task, links):
-        params = {'task': task, 'links': links, 'iterate_importance': ['0'] * task.importance, 'iterate_difficulty': ['0'] * task.difficulty}
+        completer = ''
+        if task.completed_by != None:
+            completer = task.completed_by.user.username
+        params = {'task': task, 'links': links, 'iterate_importance': ['0'] * task.importance, 'iterate_difficulty': ['0'] * task.difficulty, 'completed':(task.completed_by != None),
+        'completer':completer}
         return render(request, 'projects/view_task.html', params)
     task = Task.objects.filter(id=id).first()
     if not Task:

@@ -24,22 +24,45 @@
 function addTask() {
 	$url = "/projects/addtask/?description=" + $('[name="description"]').val() + "&difficulty=" 
 		                                  +$('[name="difficulty"]').val() + "&importance=" + $('[name="importance"]' ).val()
-		                                  + "&project=" + "{{ project.slug }}";
-	alert($url);	                            
+		                                  + "&project=" + "{{ project.slug }}";	                            
 	$.get($url);
+}
+function updateTasks() {
+	var complete = [];
+	var incomplete = [];
+	var data = $.getJSON("/projects/gettasks/?project=" + "{{ project.slug }}", function(json) {
+		$.each(json, function(i, task) {
+			if (task.fields.completed_by != null){
+				complete.push(task.fields);
+			}
+			else{
+				incomplete.push(task.fields);
+			}
+		});
+
+		$("#toDo").empty();
+		for (var i = 0; i < incomplete.length; i++) {
+			var description = incomplete[i].description;
+			$("<p>" + description + "</p>").appendTo("#toDo");
+		}
+		$("#completed").empty();
+		for (var i = 0; i < complete.length; i++) {
+			var description = complete[i].description;
+			$("<p>" + description + "</p>").appendTo("#completed");
+		}
+	});
 }
 </script>
 </head>
-<body>
+<body onload="updateTasks()">
      
 <div class="md-modal md-effect-11" id="modal-11">
 	<div class="md-content">
 		<h3>Add Task</h3>
 		<div>
 			<p style="text-align:center;">Add a task in the space below</p>
-				<p style="font-size:20px;color:#ffff;text-align:center;"> Task Name &nbsp;
-   				 <input type="text" name="description" style="color:#000;height:90px;">
-
+				<p style="font-size:20px;color:#ffff;text-align:center;"> Description &nbsp;
+   				 <textarea name="Text1" cols="40" rows="5" type="text" name="description" style="color:#000;height:90px;"></textarea>
    				 <br />
 				<p style="font-size:18px;color:#ffff;text-align:center;"> Difficulty &nbsp;
    				 <input id="ex1" name="difficulty" data-slider-id='ex1Slider' type="text" data-slider-min="1" value="4" data-slider-max="4" data-slider-step="1" data-slider-value="14"/>
@@ -75,11 +98,13 @@ function addTask() {
 <br />
 <button class="btn btn-1r btn-1r md-trigger"  data-modal="modal-11">Add Task</button>
 </div>
-<div style="padding:20px;font-size:64px;width:400px;position:relative;
-    float:left;">To Do
+<div style="padding:20px;font-size:64px;position:relative;
+    float:left;left:100px;"><p>To Do</p>
+    <div id = "toDo" style="font-size:34px;"></div>
 </div>
 <div style="padding:20px;font-size:64px;width:400px;position:relative;
-    float:right;">Completed
+    float:right;right:50px;"><p>Completed</p>
+	<div id = "completed" style="font-size:34px;"></div>
 </div>
 <div class="md-overlay"></div><!-- the overlay element -->
 

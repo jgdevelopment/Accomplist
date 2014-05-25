@@ -1,6 +1,4 @@
-/* General Demo Style */
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Raleway:400,300,700);
 @font-face {
 	font-family: 'codropsicons';
 	src:url('../fonts/codropsicons/codropsicons.eot');
@@ -12,43 +10,16 @@
 	font-style: normal;
 }
 
-*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-body, html { font-size: 100%; padding: 0; margin: 0; height: 100%;}
-
-/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
-.clearfix:before, .clearfix:after { content: " "; display: table; }
-.clearfix:after { clear: both; }
-
-body {
-	font-family: 'Lato', Calibri, Arial, sans-serif;
-	color: #FAFAFA;
-	background: #0e83cd;
+.container > header,
+.codrops-top {
+	font-family: 'Lato', Arial, sans-serif;
 }
 
-a {
-	color: #888;
-	text-decoration: none;
-}
-
-a:hover,
-a:active {
-	color: #333;
-}
-span{
-display:inline-block;
-vertical-align: middle;
-line-height: normal;
-height: 50px;
-}
-/* Header Style */
-.main,
 .container > header {
 	margin: 0 auto;
 	padding: 2em;
-}
-
-.container > header {
 	text-align: center;
+	color: #89867e;
 }
 
 .container > header h1 {
@@ -61,7 +32,7 @@ height: 50px;
 .container > header span {
 	display: block;
 	font-size: 60%;
-	opacity: 0.5;
+	color: #ceccc6;
 	padding: 0 0 0.6em 0.1em;
 }
 
@@ -76,6 +47,7 @@ height: 50px;
 }
 
 .codrops-top a {
+	text-decoration: none;
 	padding: 0 1em;
 	letter-spacing: 0.1em;
 	color: #888;
@@ -84,7 +56,7 @@ height: 50px;
 
 .codrops-top a:hover {
 	background: rgba(255,255,255,0.95);
-	color: #333;
+	color: #716d62;
 }
 
 .codrops-top span.right {
@@ -116,80 +88,54 @@ height: 50px;
 	content: "\e004";
 }
 
-.codrops-icon-archive:before {
-	content: "\e002";
-}
-
-.codrops-icon-next:before {
-	content: "\e000";
-}
-
-.codrops-icon-about:before {
-	content: "\e003";
-}
-
-.container {
-	height: 100%;
-	position: relative;
-}
-
 .container > section {
 	margin: 0 auto;
-	padding: 5em 3em;
+	padding: 10em 3em;
 	text-align: center;
-	color: #fff;
-}
-
-.container > section p {
-	position: relative;
-	margin: 0;
-	padding: 1em;
-	z-index: 1;
-}
-
-.container > section p.text {
-	font-size: 1.4em;
-}
-
-.no-touch .note-touch {
-	display: none;
 }
 
 .color-1 {
-	background: #0e83cd;
+	background: #435a6b;
 }
 
 .color-2 {
-	background: #f06060;
+	background: #f39c12;
 }
 
 .color-3 {
-	background: #fcd04b;
+	background: #2ac56c;
 }
 
 .color-4 {
-	background: #2ecc71;
+	background: #0e83cd;
 }
 
 .color-5 {
-	background: #9e54bd;
+	background: #cd4436;
 }
 
 .color-6 {
-	background: #4593e3;
+	background: #f19f0f;
 }
 
 .color-7 {
-	background: #2ac56c;
+	background: #3fa46a;
 }
 
 .color-8 {
 	background: #ecf0f1;
 }
 
-.color-8 p.text {
-	color: #aaa;
-	font-weight: bold;
+.color-9 {
+	background: #9e487f;
+}
+
+.color-10 {
+	background: #16a085;
+}
+
+.color-11 {
+	background: #aab7b7;
 }
 
 @media screen and (max-width: 25em) {

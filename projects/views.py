@@ -86,7 +86,7 @@ def add_task(request):
 @authenticate
 def view_task(request, id):
     def render_page(task, links):
-        params = {'task': task, 'links': links}
+        params = {'task': task, 'links': links, 'iterate_importance': ['0'] * task.importance, 'iterate_difficulty': ['0'] * task.difficulty}
         return render(request, 'projects/view_task.html', params)
     task = Task.objects.filter(id=id).first()
     if not Task:

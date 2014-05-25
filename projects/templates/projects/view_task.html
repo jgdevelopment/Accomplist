@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/default2.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/component2.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
@@ -21,9 +23,9 @@
 
 <script type="text/javascript">
 function completeTask() {
-    var url = "/completetask?task=" + "{{ task.id }}";
-    alert(url)
-    $.get(url);
+	var url = '/completetask?task=' + "{{ task.id }}"
+	$.get(url)
+	window.location = '/projects/view/{{ task.project.slug }}'
 }
 
 function addLink() {
@@ -37,41 +39,41 @@ function addLink() {
 </head>
 
 <body>
-<h2 style="text-align:center;font-size:72;color:#fff;">Task: {{ task.description }}</h2>
+<div class="col-sm-offset-2 col-sm-8">
+<h2 style="text-align:left;font-size:72;color:#fff;">Task: {{ task.description }}</h2>
 <br />
 <br />
 <br />
-<center>
-<p style="font-size:42;display:inline;text-align:center;">Importance:
+<p style="font-size:42;display:inline;text-align:left;">Importance:
 {% for i in iterate_importance %}
 <img src="{% static 'images/ratingCircle.png' %}" style="width:40px;">
 {% endfor %}
 </p>
 <br />
 <br />
-<p style="font-size:42;display:inline;text-align:center;"> Difficulty: 
+<p style="font-size:42;display:inline;text-align:left;"> Difficulty: 
 {% for i in iterate_difficulty %}
 <img src="{% static 'images/ratingCircleGreen.png' %}" style="width:40px;">
 {% endfor %}
 </p>
-</center>
-
+<br />
+<br />
+<br />
 <br />
 {% for link in links %}
-    <h4 style="text-align:center;">{{ link.name }}</h4>
-    <a href="{{ link.url }}">{{ link.url }}</a> <br /><br />
+    <h4 style="font-size:30;display:inline;color:#fff;">{{ link.name }}</h4> <br />
+    <a href="{{ link.url }}" style="font-size:20;display:inline;color:#fff;">{{ link.url }}</a> <br /><br />
 {% endfor %}
 <div style="text-align:center;">
-<h4 style="font-size:30;color:#fff;"> Add Link</h4>
-<form id = "myForm" method="post" class="form-1" style="width:500px;text-align:center;">
-<input placeholder="Title" type="text" name="name"></input><br />
+<form id = "myForm" method="post" class="form-1" style="width:800px;text-align:center;">
+<a href="javascript:addLink()"style="font-size:30;">Add Link</a>
+<input placeholder="Title" type="text" name="name" ></input><br />
 <input placeholder="URL" type="text" width="200" name="url"></input><br />
-<a href="javascript:addLink()"style="font-size:24;">Add</a>
 <br />
 
-
 <a href="/projects/view/{{ task.project.slug }}"style="font-size:24;">Back to Project</a> <br /><br />
-
-<a href="javascript:completeTask()"style="font-size:50;">Complete Task</a>
+</form>
+<button class="btn btn-1 btn-1g" style="font-size:20px;" onclick="javascript:completeTask()">Complete Task</button>
+</div>
 </div>
 </body>

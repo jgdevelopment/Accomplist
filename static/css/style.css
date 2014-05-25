@@ -154,49 +154,15 @@
 
 .form-1 button {
     /* Size and position */
-    width: 100%;
-    height: 100%;
-    margin-top: -1px;
-
-    /* Icon styles */
-    font-size: 1.4em;
-    line-height: 1.75;
-    color: white;
-
-    /* Styles */
-    border: none; /* Remove the default border */
-    border-radius: inherit;
-    background: #52cfeb; /* Fallback */
-    background: -moz-linear-gradient(#52cfeb, #42A2BC);
-    background: -ms-linear-gradient(#52cfeb, #42A2BC);
-    background: -o-linear-gradient(#52cfeb, #42A2BC);
-    background: -webkit-gradient(linear, 0 0, 0 100%, from(#52cfeb), to(#42A2BC));
-    background: -webkit-linear-gradient(#52cfeb, #42A2BC);
-    background: linear-gradient(#52cfeb, #42A2BC);
-    box-shadow: 
-        inset 0 1px 0 rgba(255,255,255,0.3),
-        0 1px 2px rgba(0,0,0,0.35),
-        inset 0 3px 2px rgba(255,255,255,0.2),
-        inset 0 -3px 2px rgba(0,0,0,0.1);
-
-    cursor: pointer;
+       cursor: pointer;
 }
 
 .form-1 button:hover,
 .form-1 button[type=submit]:focus {
-    background: #52cfeb;
-    -webkit-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -ms-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-}
+
 
 .form-1 button:active {
-    background: #42A2BC;
-    box-shadow: 
-        inset 0 0 5px rgba(0,0,0,0.3),
-        inset 0 3px 4px rgba(0,0,0,0.3);
+
 }
 
 

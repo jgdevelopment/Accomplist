@@ -1,12 +1,13 @@
 from django.shortcuts import render
 
 from projects.models import Project
-from accounts.models import UserProfile
+from accounts.models import UserProfile, authenticate
 from django.contrib.auth.models import User
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
+@authenticate
 def create_project(request):
     def render_page():
         return render(request, 'projects/create_project.html')
@@ -16,9 +17,6 @@ def create_project(request):
         project = Project.create(project_name)
         project.save()
         
-        if not UserProfile.objects.filter(user=request.user).exists():
-            profile = UserProfile.create(user=request.user)
-            profile.save()
         current_user_profile = UserProfile.objects.get(user=request.user)
         project.users.add(current_user_profile)
         
@@ -33,7 +31,7 @@ def create_project(request):
         return HttpResponseRedirect(reverse('projects.views.view_project', args=(project.slug,)))
     
     return render_page()
-    
+
 def view_project(request, slug):
     def render_page(project, currentUserScore, sortedScores):
         params = {'project': project, 
@@ -44,7 +42,7 @@ def view_project(request, slug):
     project = Project.objects.filter(slug=slug).first()
     if not project:
         return render(request, 'projects/does_not_exist.html')
-        
+
     current_profile = None
     current_score = 0
     otherScores = []
@@ -54,6 +52,9 @@ def view_project(request, slug):
             current_score = project.score_for(profile)
         else:
             otherScores.append([profile, project.score_for(profile)])
+            
+    if not current_profile:
+        return HttpResponseRedirect(reverse('accounts.views.login'))
 
     def sortKey(x):
         return x[1]

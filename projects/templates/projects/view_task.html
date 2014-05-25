@@ -23,9 +23,9 @@
 
 <script type="text/javascript">
 function completeTask() {
-	var url = '/completetask?task=' + "{{ task.id }}"
-	$.get(url)
-	window.location = '/projects/view/{{ task.project.slug }}'
+	var url = '/completetask?task={{ task.id }}';
+	$.get(url);
+    setTimeout(function(){window.location = '/projects/view/{{ task.project.slug }}';}, 300);
 }
 
 function addLink() {

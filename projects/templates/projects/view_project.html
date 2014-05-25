@@ -27,6 +27,7 @@ function addTask() {
 		                                  +$('[name="difficulty"]').val() + "&importance=" + $('[name="importance"]' ).val()
 		                                  + "&project=" + "{{ project.slug }}";	                            
 	$.get($url);
+    setTimeout(function() {updateTasks()}, 500);
 }
 function updateTasks() {
 	var complete = [];
@@ -49,8 +50,9 @@ function updateTasks() {
 		}
 		$("#completed").empty();
 		for (var i = 0; i < complete.length; i++) {
-			var description = complete[i].fields.description;
-			$("<p>"+ description + "</p>").appendTo("#completed");
+            var description = complete[i].fields.description;
+			var pk = complete[i].pk;
+			$("<p>" + "<a href='/task/"+  pk + "'>" + description +  "</a>" + "</p>").appendTo("#completed");
 		}
 	});
 }
@@ -75,7 +77,7 @@ function updateTasks() {
    				<br />
    				<br />
 
-			<button onclick="addTask()" class="btn btn-1w btn-1w md-close" type="submit">Submit</button>
+			<button onclick="addTask();updateTasks()" class="btn btn-1w btn-1w md-close" type="submit">Submit</button>
 		</div>
 	</div>
 </div>

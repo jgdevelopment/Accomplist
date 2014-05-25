@@ -35,12 +35,27 @@ def create_project(request):
     return render_page()
     
 def view_project(request, slug):
-    def render_page(project):
-        params = {'project': project}
+    def render_page(project, currentUserScore, sortedScores):
+        params = {'project': project, 
+                  'currentUserScore': currentUserScore,
+                  'sortedScores': sortedScores}
         return render(request, 'projects/view_project.html', params)
         
     project = Project.objects.filter(slug=slug).first()
     if not project:
         return render(request, 'projects/does_not_exist.html')
-    print(project.users.all())
-    return render_page(project)
+        
+    current_profile = None
+    current_score = 0
+    otherScores = []
+    for profile in UserProfile.objects.filter(project=project):
+        if profile.user == request.user:
+            current_profile = profile
+            current_score = project.score_for(profile)
+        else:
+            otherScores.append([profile, project.score_for(profile)])
+
+    def sortKey(x):
+        return x[1]
+
+    return render_page(project, [current_profile, current_score], sorted(otherScores, key=sortKey))

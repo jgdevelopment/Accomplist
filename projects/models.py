@@ -11,5 +11,18 @@ class Project(models.Model):
         slug = slugify(name)
         return cls(name=name, slug=slug)
         
+    def score_for(self, user):
+        score = 0
+        for task in Task.objects.filter(completed_by=user):
+            score += (difficulty + importance)
+        return score
+        
     def __str__(self):
         return 'Project: ' + self.name
+        
+class Task(models.Model):
+    project = models.ForeignKey('projects.Project')
+    difficulty = models.IntegerField()
+    importance = models.IntegerField()
+    description = models.CharField(max_length=1000)
+    completed_by = models.ForeignKey('accounts.UserProfile')

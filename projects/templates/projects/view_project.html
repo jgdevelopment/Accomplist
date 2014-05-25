@@ -5,4 +5,15 @@
 
 <body>
 <h1>Project: {{ project.name }}</h1>
+
+<h2>
+Your username: {{ currentUserScore.0 }} <br />
+Your score: {{ currentUserScore.1 }}
+</h2>
+
+{% for score in sortedScores %}
+    <h5>Other username: {{ score.0 }}</h5>
+    <h5>His/her score: {{ score.1 }}</h5>
+{% endfor %}
+
 </body>

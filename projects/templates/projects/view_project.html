@@ -33,7 +33,6 @@ function updateTasks() {
 	var incomplete = [];
 	var data = $.getJSON("/projects/gettasks/?project=" + "{{ project.slug }}", function(json) {
 		$.each(json, function(i, task) {
-			alert(task.fields.)
 			if (task.fields.completed_by != null){
 				complete.push(task);
 			}
@@ -51,7 +50,7 @@ function updateTasks() {
 		$("#completed").empty();
 		for (var i = 0; i < complete.length; i++) {
 			var description = complete[i].fields.description;
-			$("<p>"+ description + "<p>").appendTo("#completed");
+			$("<p>"+ description + "</p>").appendTo("#completed");
 		}
 	});
 }

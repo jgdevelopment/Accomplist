@@ -2,7 +2,21 @@
 <html>
 <head>
 <title>View Task</title>
+<link rel="shortcut icon" href="../favicon.ico"> 
+<script src="{% static 'js/jquery-1.10.2.min.js' %}" ></script>
+<script src="{% static '/js/chart.js' %}"></script>
 
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/slider.css' %}" />
+<script src="{% static 'js/modernizr.custom.js' %}" ></script>
+
+<script src="{% static 'js/bootstrap-slider.js' %}" ></script>
 <script src="{% static 'js/jquery-1.10.2.min.js' %}" ></script>
 
 <script type="text/javascript">
@@ -23,24 +37,77 @@ function addLink() {
 </head>
 
 <body>
-<h1>Task: {{ task.description }}</h1>
+<h2 style="text-align:center;font-size:72;color:#fff;">Task: {{ task.description }}</h2>
+<br />
+<br />
+<br />
+<center>
+<p style="font-size:42;display:inline;text-align:center;">Importance:
+{% for i in iterate_importance %}
+<img src="{% static 'images/ratingCircle.png' %}" style="width:40px;">
+{% endfor %}
+</p>
+<br />
+<br />
+<p style="font-size:42;display:inline;text-align:center;"> Difficulty: 
+{% for i in iterate_difficulty %}
+<img src="{% static 'images/ratingCircleGreen.png' %}" style="width:40px;">
+{% endfor %}
+</p>
+</center>
 
-<p>Importance: {{task.importance}}</p>
-<p>Difficulty: {{task.difficulty}}</p>
-
+<br />
 {% for link in links %}
-    <h4>{{ link.name }}</h4>
+    <h4 style="text-align:center;">{{ link.name }}</h4>
     <a href="{{ link.url }}">{{ link.url }}</a> <br /><br />
 {% endfor %}
-
-<h4>Add Link</h4>
-<form>
+<div style="text-align:center;">
+<h4 style="font-size:30;color:#fff;"> Add Link</h4>
+<form id = "myForm" method="post" class="form-1" style="width:500px;text-align:center;">
 <input placeholder="Title" type="text" name="name"></input><br />
 <input placeholder="URL" type="text" width="200" name="url"></input><br />
-<a href="javascript:addLink()">Add Link</a>
+<a href="javascript:addLink()"style="font-size:30;">Add</a>
 <br />
 
-<a href="/projects/view/{{ task.project.slug }}">back to project</a> <br />
-<a href="javascript:completeTask()">Complete Task</a>
 
+<a href="/projects/view/{{ task.project.slug }}"style="font-size:30;">Back to Project</a> <br /><br />
+<section  id="btn-click">
+<button button class="btn btn-7 btn-7h icon-envelope" href="javascript:completeTask()"style="font-size:50;">Complete Task</button>
+</section>
+</div>
+<script src="js/classie.js"></script>
+		<script>
+			var buttons7Click = Array.prototype.slice.call( document.querySelectorAll( '#btn-click button' ) ),
+				buttons9Click = Array.prototype.slice.call( document.querySelectorAll( 'button.btn-8g' ) ),
+				totalButtons7Click = buttons7Click.length,
+				totalButtons9Click = buttons9Click.length;
+
+			buttons7Click.forEach( function( el, i ) { el.addEventListener( 'click', activate, false ); } );
+			buttons9Click.forEach( function( el, i ) { el.addEventListener( 'click', activate, false ); } );
+
+			function activate() {
+				var self = this, activatedClass = 'btn-activated';
+
+				if( classie.has( this, 'btn-7h' ) ) {
+					// if it is the first of the two btn-7h then activatedClass = 'btn-error';
+					// if it is the second then activatedClass = 'btn-success'
+					activatedClass = buttons7Click.indexOf( this ) === totalButtons7Click-2 ? 'btn-error' : 'btn-success';
+				}
+				else if( classie.has( this, 'btn-8g' ) ) {
+					// if it is the first of the two btn-8g then activatedClass = 'btn-success3d';
+					// if it is the second then activatedClass = 'btn-error3d'
+					activatedClass = buttons9Click.indexOf( this ) === totalButtons9Click-2 ? 'btn-success3d' : 'btn-error3d';
+				}
+
+				if( !classie.has( this, activatedClass ) ) {
+					classie.add( this, activatedClass );
+					setTimeout( function() { classie.remove( self, activatedClass ) }, 1000 );
+				}
+			}
+
+			document.querySelector( '.btn-7i' ).addEventListener( 'click', function() {
+				classie.add( document.querySelector( '#trash-effect' ), 'trash-effect-active' );
+			}, false );
+		</script>
 </body>
+</html>

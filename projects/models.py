@@ -30,3 +30,12 @@ class Task(models.Model):
     @classmethod
     def create(cls, project, difficulty, importance, description):
         return Task(project=project, difficulty=difficulty, importance=importance, description=description, completed_by=None)
+        
+class Link(models.Model):
+    task = models.ForeignKey('projects.Task')
+    name = models.CharField(max_length=80)
+    url = models.URLField()
+    
+    @classmethod
+    def create(cls, task, name, url):
+        return Link(task=task, name=name, url=url)

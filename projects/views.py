@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from projects.models import Project, Task
+from projects.models import Project, Task, Link
 from accounts.models import UserProfile, Color, authenticate
 from django.contrib.auth.models import User
 
@@ -85,8 +85,8 @@ def add_task(request):
     
 @authenticate
 def view_task(request, id):
-    def render_page(task):
-        params = {'task': task}
+    def render_page(task, links):
+        params = {'task': task, 'links': links}
         return render(request, 'projects/view_task.html', params)
     task = Task.objects.filter(id=id).first()
     if not Task:
@@ -97,8 +97,10 @@ def view_task(request, id):
     current_user_profile = UserProfile.objects.filter(user=current_user).first()
     if not current_user_profile in UserProfile.objects.filter(project=task.project):
         return HttpResponseForbidden()   
+    
+    links = list(Link.objects.filter(task=task))
      
-    return render_page(task)
+    return render_page(task, links)
     
 @authenticate
 def complete_task(request):
@@ -132,4 +134,15 @@ def get_tasks(request):
     tasks = sorted(tasks, key=sortKey)
     
     return HttpResponse(serializers.serialize("json", tasks), content_type='application/json')
+
+def add_link(request):
+    task = Task.objects.filter(id=request.GET.get('task')).first()
+    if not task:
+        return HttpResponseNotFound('<h1>Task does not exist.</h1>')
+    name = request.GET.get('name')
+    url = request.GET.get('url')
+        
+    link = Link.create(task, name, url)
+    link.save()
     
+    return HttpResponse('<h1>Added link.</h1>')

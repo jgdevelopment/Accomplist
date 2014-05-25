@@ -1,6 +1,25 @@
+{% load staticfiles %}
 <html>
 <head>
 <title>View Task</title>
+
+<script src="{% static 'js/jquery-1.10.2.min.js' %}" ></script>
+
+<script type="text/javascript">
+function completeTask() {
+    var url = "/completetask?task=" + "{{ task.id }}";
+    alert(url)
+    $.get(url);
+}
+
+function addLink() {
+    var url = '/addlink?task={{ task.id }}&name=' + $('[name="name"]').val()
+                                                  + '&url=' + $('[name="url"]').val();
+    $.get(url)
+    setTimeout(function(){location.reload()}, 300);
+}
+</script>
+
 </head>
 
 <body>
@@ -9,6 +28,19 @@
 <p>Importance: {{task.importance}}</p>
 <p>Difficulty: {{task.difficulty}}</p>
 
-<a href="/projects/view/{{ task.project.slug }}">back to project</a>
+{% for link in links %}
+    <h4>{{ link.name }}</h4>
+    <a href="{{ link.url }}">{{ link.url }}</a> <br /><br />
+{% endfor %}
+
+<h4>Add Link</h4>
+<form>
+<input placeholder="Title" type="text" name="name"></input><br />
+<input placeholder="URL" type="text" width="200" name="url"></input><br />
+<a href="javascript:addLink()">Add Link</a>
+<br />
+
+<a href="/projects/view/{{ task.project.slug }}">back to project</a> <br />
+<a href="javascript:completeTask()">Complete Task</a>
 
 </body>

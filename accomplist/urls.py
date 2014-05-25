@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^task/(?P<id>[0-9]+)', 'projects.views.view_task'),
     url(r'^completetask/', 'projects.views.complete_task'),
     url(r'^setup/', 'accounts.views.setup'),
+    url(r'^addlink/', 'projects.views.add_link'),
     url(r'^', include(main.urls)),
 
 )

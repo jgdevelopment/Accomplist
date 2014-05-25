@@ -1,11 +1,13 @@
 from django.shortcuts import render
 
 from projects.models import Project, Task
-from accounts.models import UserProfile, authenticate
+from accounts.models import UserProfile, Color, authenticate
 from django.contrib.auth.models import User
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, HttpResponseNotFound
+
+from django.core import serializers
 
 @authenticate
 def create_project(request):
@@ -96,3 +98,37 @@ def view_task(request, id):
         return HttpResponseForbidden()   
      
     return render_page(task)
+    
+@authenticate
+def complete_task(request):
+    task = Task.objects.filter(id=request.GET.get('task')).first()
+    if not task:
+        return HttpResponseNotFound('<h1>Task does not exist.</h1>')
+        
+    project = task.project
+        
+    # must be part of project to view task
+    current_user = User.objects.filter(id=request.user.id).first()
+    current_user_profile = UserProfile.objects.filter(user=current_user).first()
+    if not current_user_profile in UserProfile.objects.filter(project=task.project):
+        return HttpResponseForbidden()
+        
+    if task.completed_by:
+        return HttpResponse('Task already completed.')
+    task.completed_by = current_user_profile
+    task.save()
+    return HttpResponse('Task completed.')
+    
+@authenticate
+def get_tasks(request):
+    project = Project.objects.filter(slug=request.GET.get('project')).first()
+    if not project:
+        return HttpResponseNotFound('<h1>Project does not exist.</h1>')
+        
+    tasks = list(Task.objects.filter(project=project))
+    def sortKey(x):
+        return -(x.importance + x.difficulty)
+    tasks = sorted(tasks, key=sortKey)
+    
+    return HttpResponse(serializers.serialize("json", tasks), content_type='application/json')
+    

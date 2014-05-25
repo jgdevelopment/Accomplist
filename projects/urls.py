@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^create/', views.create_project, name='create_project'),
     url(r'view/(?P<slug>[\w-]+)', views.view_project, name='view_project'),
     url(r'^addtask/', views.add_task, name='add_task'),
+    url(r'^gettasks/', views.get_tasks, name='get_tasks'),
 )

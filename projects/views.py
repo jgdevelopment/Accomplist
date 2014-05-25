@@ -124,6 +124,11 @@ def get_tasks(request):
     project = Project.objects.filter(slug=request.GET.get('project')).first()
     if not project:
         return HttpResponseNotFound('<h1>Project does not exist.</h1>')
-    tasks = Task.objects.filter(project=project)
+        
+    tasks = list(Task.objects.filter(project=project))
+    def sortKey(x):
+        return -(x.importance + x.difficulty)
+    tasks = sorted(tasks, key=sortKey)
+    
     return HttpResponse(serializers.serialize("json", tasks), content_type='application/json')
     

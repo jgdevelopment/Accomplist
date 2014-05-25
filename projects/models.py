@@ -25,4 +25,8 @@ class Task(models.Model):
     difficulty = models.IntegerField()
     importance = models.IntegerField()
     description = models.CharField(max_length=1000)
-    completed_by = models.ForeignKey('accounts.UserProfile')
+    completed_by = models.ForeignKey('accounts.UserProfile', null=True, blank=True)
+    
+    @classmethod
+    def create(cls, project, difficulty, importance, description):
+        return Task(project=project, difficulty=difficulty, importance=importance, description=description, completed_by=None)

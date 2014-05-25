@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>View Task</title>
+</head>
+
+<body>
+<h1>Task: {{ task.description }}</h1>
+
+<p>Importance: {{task.importance}}</p>
+<p>Difficulty: {{task.difficulty}}</p>
+
+<a href="/projects/view/{{ task.project.slug }}">back to project</a>
+
+</body>

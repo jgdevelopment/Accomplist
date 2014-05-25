@@ -8,8 +8,21 @@ from django.http import HttpResponseRedirect
 
 from functools import wraps
 
+class Color(models.Model):
+    r = models.IntegerField()
+    g = models.IntegerField()
+    b = models.IntegerField()
+    
+    @classmethod
+    def create(cls, r, g, b):
+        return Color(r=r, g=g, b=b)
+    
+    def __str_(self):
+        return '[Color: (' + str(r) + ', ' + str(g) + ', ' + str(b) + ') ]'
+
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
+    color = models.ForeignKey(Color, null=True)
     
     @classmethod
     def create(cls, user):

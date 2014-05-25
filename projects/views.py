@@ -1,11 +1,13 @@
 from django.shortcuts import render
 
 from projects.models import Project, Task
-from accounts.models import UserProfile, authenticate
+from accounts.models import UserProfile, Color, authenticate
 from django.contrib.auth.models import User
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+
+from django.core import serializers
 
 @authenticate
 def create_project(request):
@@ -96,3 +98,12 @@ def view_task(request, id):
         return HttpResponseForbidden()   
      
     return render_page(task)
+    
+@authenticate
+def get_tasks(request):
+    project = Project.objects.filter(slug=request.GET.get('project')).first()
+    if not project:
+        return HttpResponseNotFound('<h1>Project does not exist.</h1>')
+    tasks = Task.objects.filter(project=project)
+    return HttpResponse(serializers.serialize("json", tasks), content_type='application/json')
+    

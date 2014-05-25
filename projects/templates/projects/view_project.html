@@ -1,19 +1,39 @@
+{% extends "accomplist/base.html" %}
+{% load staticfiles %}
+<!DOCTYPE html>
+{% block title %}View Project{% endblock %}
+{% block content %}
+
 <html>
 <head>
 <title>View Project</title>
+<link rel="shortcut icon" href="../favicon.ico"> 
+<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/default2.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'grayscale/css/component2.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 </head>
-
 <body>
-<h1>Project: {{ project.name }}</h1>
-
+<a href="../create"><img src="{% static 'images/darkback.png' %}"style="position: relative;width: 50px;left:100px;top:50px;"></a>
+<div style="text-align:center;">
+<h1 style="text-transform:uppercase;font-size:94px;">{{ project.name }}</h1>
 <h2>
-Your username: {{ currentUserScore.0 }} <br />
-Your score: {{ currentUserScore.1 }}
-</h2>
-
+<b style="font-weight:regular;background-color:#fff;padding:10px;">
+<b style="font-size:20px;">
+{{ currentUserScore.0 }}</b> &nbsp; {{ currentUserScore.1}}
+</b>
 {% for score in sortedScores %}
-    <h5>Other username: {{ score.0 }}</h5>
-    <h5>His/her score: {{ score.1 }}</h5>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b style="font-weight:regular;background-color:#fff;padding:10px;">
+<b style="font-size:20px;">
+{{ score.0 }}</b>  &nbsp; {{ score.1 }}
+</b>
 {% endfor %}
-
+</h2>
+</div>
 </body>
+</html>
+
+{% endblock %}

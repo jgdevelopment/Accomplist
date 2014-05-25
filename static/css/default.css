@@ -34,7 +34,13 @@ a:hover,
 a:active {
 	color: #333;
 }
-
+span{
+display:inline-block;
+vertical-align: middle;
+line-height: normal;
+width: 100px;
+height: 100px;
+}
 /* Header Style */
 .main,
 .container > header {

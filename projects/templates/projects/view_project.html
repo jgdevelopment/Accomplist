@@ -23,7 +23,7 @@
 <script src="{% static 'js/bootstrap-slider.js' %}" ></script>
 <script type="text/javascript">
 function addTask() {
-	$url = "/projects/addtask/?description=" + $('[name="description"]').val() + "&difficulty=" 
+	$url = "/projects/addtask/?description=" + $('#description').val() + "&difficulty=" 
 		                                  +$('[name="difficulty"]').val() + "&importance=" + $('[name="importance"]' ).val()
 		                                  + "&project=" + "{{ project.slug }}";	                            
 	$.get($url);
@@ -33,6 +33,7 @@ function updateTasks() {
 	var incomplete = [];
 	var data = $.getJSON("/projects/gettasks/?project=" + "{{ project.slug }}", function(json) {
 		$.each(json, function(i, task) {
+			alert(task);
 			if (task.fields.completed_by != null){
 				complete.push(task);
 			}
@@ -50,7 +51,7 @@ function updateTasks() {
 		$("#completed").empty();
 		for (var i = 0; i < complete.length; i++) {
 			var description = complete[i].fields.description;
-			$("<p>"+"<a href='#'>" + description +"</a>"+ "</p>").appendTo("#completed");
+			//$("<p>"+ description + "</p>" + "<br />" + "<p>").appendTo("#completed");
 		}
 	});
 }
@@ -63,7 +64,7 @@ function updateTasks() {
 		<div>
 			<p style="text-align:center;">Add a task in the space below</p>
 				<p style="font-size:20px;color:#ffff;text-align:center;"> Description &nbsp;
-   				 <textarea name="Text1" cols="40" rows="5" type="text" name="description" style="color:#000;height:90px;"></textarea>
+   				 <textarea name="Text1" cols="40" rows="5" type="text" id="description" name="description" style="color:#000;height:90px;"></textarea>
    				 <br />
 				<p style="font-size:18px;color:#ffff;text-align:center;"> Difficulty &nbsp;
    				 <input id="ex1" name="difficulty" data-slider-id='ex1Slider' type="text" data-slider-min="1" value="4" data-slider-max="4" data-slider-step="1" data-slider-value="14"/>
@@ -77,7 +78,6 @@ function updateTasks() {
 		</div>
 	</div>
 </div>
-<a href="../create"><img src="{% static 'images/darkback.png' %}"style="position: relative;width: 50px;left:100px;top:50px;"></a>
 <div style="text-align:center;">
 <h1 style="text-transform:uppercase;font-size:94px;">{{ project.name }}</h1>
 <button class="btn btn-1r btn-1r md-trigger"  data-modal="modal-11">Add Task</button>
@@ -86,41 +86,39 @@ function updateTasks() {
 <div id="green">
 <div class="container">
 <div class="row">
-<div class="col-lg-7 centered">
-<p style="font-weight:regular;color:#fff;font-size:30px;padding:20px;position:relative;
-float:left;left:-145px;text-align:left;">Leaderboards:</p>
+<center>
+<p style="font-weight:regular;color:#fff;font-size:30px;text-align:center;">Leaderboards:
 <h2>
-</br>
-<b style="font-weight:regular;color:#fff;font-size:30px;padding:20px;position:relative;
-float:left;left:-360px;text-align:left;">
-{{ currentUserScore.0.user.username}}&nbsp;&nbsp;&nbsp;&nbsp; {{ currentUserScore.1}}
-<br />
-<br />
+<b style="font-weight:regular;color:rgb({{currentUserScore.0.color.r}},{{currentUserScore.0.color.g}},{{currentUserScore.0.color.b}});font-size:40px;display:inline;text-align:center;">
+{{ currentUserScore.0.user.username}}&nbsp;&nbsp;&nbsp;&nbsp; {{ currentUserScore.1}}&nbsp;&nbsp;&nbsp;&nbsp;</b>
 {% for score in sortedScores %}
+<b style="color:rgb({{score.0.color.r}},{{score.0.color.g}},{{score.0.color.b}});">
 {{ score.0.user.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{ score.1 }}
-<br />
-<br />
+</b>
+&nbsp;&nbsp;&nbsp;&nbsp;
 {% endfor %}
+</p>
+</center>
 </b>
 </h2>
 </div>
 </div>
 </div>
 </div>
-
-</div>
-<div  style="padding:20px;font-size:64px;position:relative;
-    float:left;left:50px;top:50px;">
+<div class="col-sm-offset-2 col-sm-4" style="font-size:64px;top:50px;">
     <p>To Do</p>
-    <div id = "toDo" style="font-size:25px;position:relative;
-    float:left;left:10px;top:20px;"></div>
-</div>
-<div style="padding:20px;font-size:64px;width:400px;position:relative;
-    float:right;right:50px;top:50px;"><p>Completed</p>
 
-	<div id = "completed" style="font-size:25px;;position:relative;
-    float:right;right:310px;top:20px;"></div>
+    <img src="{% static 'images/darkUnderline.png' %}"style="position: relative;width:500px;height:20px;">
+
+    <div id = "toDo" style="font-size:25px;display:inline;text-align:left;"></div>
 </div>
+
+<div class="col-sm-4" style="font-size:64px;top:12px;">
+<p style="text-align:right;display:inline;">Completed</p>
+<img src="{% static 'images/darkUnderline.png' %}"style="position: relative;width:500px;height:20px;">
+	<div id = "completed" style="font-size:25px;display:inline;text-align:left;"></div>
+</div>
+
 <div class="md-overlay"></div><!-- the overlay element -->
 
 		<!-- classie.js by @desandro: https://github.com/desandro/classie -->

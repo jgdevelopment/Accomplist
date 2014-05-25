@@ -252,6 +252,14 @@
 	background-color: #fff;
 
 }
+.btn-1g:hover,
+.btn-1g:active{
+	border: 3px solid #0AD85C;
+	color: #fff;
+	background-color: #0AD85C;
+;
+
+}
 .btn-1w:hover,
 .btn-1w:active{
 	border: 3px solid #fff;
@@ -305,7 +313,14 @@
 .btn-1c:active:after {
 	width: 100%;
 }
+.btn-1g:hover:after,
+.btn-1g:active:after {
+	border: 3px solid #0AD85C;
+	color: #fff;
+	background-color: #0AD85C;
+;
 
+}
 /* Button 1d */
 .btn-1d {
 	overflow: hidden;

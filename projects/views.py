@@ -5,7 +5,7 @@ from accounts.models import UserProfile, Color, authenticate
 from django.contrib.auth.models import User
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, HttpResponseNotFound
 
 from django.core import serializers
 
@@ -98,6 +98,26 @@ def view_task(request, id):
         return HttpResponseForbidden()   
      
     return render_page(task)
+    
+@authenticate
+def complete_task(request):
+    task = Task.objects.filter(id=request.GET.get('task')).first()
+    if not task:
+        return HttpResponseNotFound('<h1>Task does not exist.</h1>')
+        
+    project = task.project
+        
+    # must be part of project to view task
+    current_user = User.objects.filter(id=request.user.id).first()
+    current_user_profile = UserProfile.objects.filter(user=current_user).first()
+    if not current_user_profile in UserProfile.objects.filter(project=task.project):
+        return HttpResponseForbidden()
+        
+    if task.completed_by:
+        return HttpResponse('Task already completed.')
+    task.completed_by = current_user_profile
+    task.save()
+    return HttpResponse('Task completed.')
     
 @authenticate
 def get_tasks(request):
